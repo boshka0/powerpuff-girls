@@ -1,0 +1,34 @@
+.episode-preview {
+  position: relative;
+
+  &-image {
+    width: 250px;
+    height: 140px;
+  }
+
+  &:hover {
+    .episode-preview-title {
+      display: flex;
+    }
+  }
+
+  &-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #5DCAC4;
+
+    &-count {
+      color:black;
+    }
+  }
+}

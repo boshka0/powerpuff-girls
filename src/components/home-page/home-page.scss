@@ -1,0 +1,59 @@
+@import '../../utils/mixins.scss';
+
+.show {
+  padding:  20px;
+
+  &-title {
+    @include rainbow-text();
+
+    text-transform: uppercase;
+    font-size: 60px;
+    line-height: 60px;
+    text-align: center;
+    word-break: break-word;
+  }
+
+  &-info {
+    display: flex;
+    max-width: 700px;
+    margin: 0 auto;
+    margin-top: 30px;
+    align-items: center;
+    text-align: center;
+
+    @include respond(mobile) {
+      flex-direction: column;
+    }
+  }
+
+  &-image {
+    margin-right: 20px;
+  }
+
+  &-description {
+    font-size: 16px;
+    padding: 20px 20px 20px 0;
+
+    b {
+      @include rainbow-text();
+
+      font-size: 18px;
+    }
+  }
+
+  &-episodes {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  &-episodes-title {
+    color: #5DCAC4;
+    text-transform: uppercase;
+  }
+
+  &-episodes-container {
+    display: flex;
+    margin-top: 30px;
+    overflow-x: scroll;
+  }
+}

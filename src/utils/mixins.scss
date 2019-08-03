@@ -1,0 +1,13 @@
+@mixin rainbow-text {
+  background: linear-gradient(to right, aqua, pink, lime);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin respond($point) {
+  @if $point == mobile {
+    @media screen and (max-width: 640px) {
+      @content;
+    }
+  }
+}
