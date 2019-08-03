@@ -4,22 +4,37 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
 
-import { getShow, getAllEpisodes } from '../../thunks';
-
+import {
+  episodesSelector,
+  showSelector,
+  episodesLoadingSelector,
+  showLoadingSelector
+} from '../../selectors';
+import { loadEpisodes } from '../../actions/episodes';
+import { loadShow } from '../../actions/show';
 import EpisodePreview from './episode-preview';
+import Loader from '../loader';
 import './home-page.scss';
 
 const blockName = 'show';
 
-const HomePage = ({ fetchShowInfo, fetchEpisodesInfo, episodes = [], show = {} }) => {
+const HomePage = ({
+  episodes,
+  show,
+  loadEpisodes,
+  loadShow,
+  isLoadingEpisodes = true,
+  isLoadingShow = true
+}) => {
   useEffect(() => {
-    fetchShowInfo();
-    fetchEpisodesInfo();
-  }, []);
+    loadEpisodes();
+    loadShow();
+  }, [loadEpisodes, loadShow]);
 
   const showImageSrc = get(show, 'image.medium', '');
+  const isLoading = isLoadingEpisodes || isLoadingShow;
 
-  return (
+  return isLoading ? <Loader /> : (
     <div className={blockName}>
       <h1 className={`${blockName}-title`}>{show.name}</h1>
       <div className={`${blockName}-info`}>
@@ -56,19 +71,23 @@ const HomePage = ({ fetchShowInfo, fetchEpisodesInfo, episodes = [], show = {} }
 };
 
 HomePage.propTypes = {
-  fetchShowInfo: PropTypes.func,
-  fetchEpisodesInfo: PropTypes.func,
+  isLoadingEpisodes: PropTypes.bool,
+  isLoadingShow: PropTypes.bool,
+  loadEpisodes: PropTypes.func,
+  loadShow: PropTypes.func,
   episodes: PropTypes.arrayOf(PropTypes.object),
   show: PropTypes.object,
 };
 
 export default connect(
-  (state) => ({
-    episodes: state.episodes,
-    show: state.show,
+  state => ({
+    episodes: episodesSelector(state),
+    show: showSelector(state),
+    isLoadingEpisodes: episodesLoadingSelector(state),
+    isLoadingShow: showLoadingSelector(state)
   }),
-  (dispatch) => ({
-    fetchShowInfo: getShow(dispatch),
-    fetchEpisodesInfo: getAllEpisodes(dispatch),
+  dispatch => ({
+    loadEpisodes: () => dispatch(loadEpisodes()),
+    loadShow: () => dispatch(loadShow())
   })
 )(HomePage);

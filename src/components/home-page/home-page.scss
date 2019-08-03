@@ -1,7 +1,12 @@
 @import '../../utils/mixins.scss';
+@import '../../utils/colors.scss';
+
+::-webkit-scrollbar {
+  display: none;
+}
 
 .show {
-  padding:  20px;
+  padding: 20px;
 
   &-title {
     @include rainbow-text();
@@ -47,7 +52,7 @@
   }
 
   &-episodes-title {
-    color: #5DCAC4;
+    color: $main-color;
     text-transform: uppercase;
   }
 

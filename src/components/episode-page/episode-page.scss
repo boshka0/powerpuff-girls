@@ -1,4 +1,5 @@
 @import '../../utils/mixins.scss';
+@import '../../utils/colors.scss';
 
 .episode {
   position: relative;
@@ -26,7 +27,7 @@
     padding: 20px;
     max-width: 600px;
     outline: 10px solid pink;
-    border: 10px solid #5DCAC4;
+    border: 10px solid $main-color;
 
     &-heading {
       margin-bottom: 10px;

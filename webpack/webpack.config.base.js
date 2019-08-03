@@ -8,7 +8,7 @@ const entry = path.join(APP_DIR, 'index.js');
 const output = { path: BUILD_DIR, filename: 'bundle.js' };
 
 module.exports = {
-  entry,
+  entry: ['babel-polyfill', entry],
   output,
   module: {
     rules: [

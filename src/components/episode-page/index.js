@@ -5,23 +5,38 @@ import { Link } from 'react-router-dom';
 import find from 'lodash/find';
 import get from 'lodash/get';
 
-import { getEpisode } from '../../thunks';
+import { loadEpisode } from '../../actions/episode';
+import {
+  episodesSelector,
+  episodeSelector,
+  episodeLoadingSelector
+} from '../../selectors';
 import { defaultImg } from '../../utils/defaultValues';
+
+import Loader from '../loader';
 
 import './episode-page.scss';
 
 const blockName = 'episode';
 const cardName = `${blockName}-card`;
 
-const EpisodePage = ({ episodes = [], episode = {}, fetchEpisodeInfo, match: { params } }) => {
+const EpisodePage = ({
+    episodes,
+    episode,
+    match: {
+      params
+    },
+    loadEpisode,
+    isEpisodeLoading = true
+}) => {
   useEffect(() => {
-    if (!episodes.length) fetchEpisodeInfo(params.id);
-  }, []);
+    if (!episodes.length) loadEpisode();
+  }, [loadEpisode, episodes.length, params.id]);
 
-  const info = find(episodes, { id: +params.id }) || episode;
+  const info = find(episodes, { id: +params.id }) || episode || {};
   const imageSrc = get(info, 'image.medium', defaultImg);
 
-  return (
+  return isEpisodeLoading && !episodes.length ? <Loader /> : (
     <div className={blockName}>
       <Link
         className={`${blockName}-back-link`}
@@ -58,15 +73,17 @@ EpisodePage.propTypes = {
     number: PropTypes.number,
     season: PropTypes.number,
   }),
-  fetchEpisodeInfo: PropTypes.func,
+  isEpisodeLoading: PropTypes.bool,
+  loadEpisode: PropTypes.func,
 };
 
 export default connect(
   state => ({
-    episode: state.episode,
-    episodes: state.episodes,
+    episode: episodeSelector(state),
+    episodes: episodesSelector(state),
+    isEpisodeLoading: episodeLoadingSelector(state)
   }),
-  dispatch => ({
-    fetchEpisodeInfo: getEpisode(dispatch),
+  (dispatch, ownProps) => ({
+    loadEpisode: () => dispatch(loadEpisode(ownProps.match.params.id))
   })
 )(EpisodePage);

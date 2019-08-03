@@ -1,3 +1,5 @@
+@import '../../../utils/colors.scss';
+
 .episode-preview {
   position: relative;
 
@@ -25,7 +27,7 @@
     background-color: rgba(255, 255, 255, 0.9);
     text-transform: uppercase;
     font-weight: bold;
-    color: #5DCAC4;
+    color: $main-color;
 
     &-count {
       color:black;

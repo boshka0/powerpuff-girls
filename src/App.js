@@ -4,12 +4,12 @@ import { Provider } from 'react-redux';
 import HomePage from './components/home-page';
 import EpisodePage from './components/episode-page';
 import NotFound from './components/not-found-page';
-import store from './store';
+import configureStore from './store';
 import './main.scss';
 
 const App = () => {
   return (
-    <Provider store={store}>
+    <Provider store={configureStore()}>
       <Router>
         <Switch>
           <Route exact path="/" component={HomePage} />
