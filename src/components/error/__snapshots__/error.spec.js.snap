@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly error component 1`] = `
+<div
+  class="error"
+>
+  Sorry, some error occurred while preparing the response for episodes list
+</div>
+`;

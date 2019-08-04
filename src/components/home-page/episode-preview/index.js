@@ -4,7 +4,7 @@ import get from 'lodash/get';
 
 import { defaultImg } from '../../../utils/defaultValues';
 
-import './episode.scss';
+import './episode-preview.scss';
 
 const blockName = 'episode-preview';
 

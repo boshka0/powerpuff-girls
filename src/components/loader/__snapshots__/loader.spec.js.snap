@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly error component 1`] = `
+<div
+  class="spinner"
+>
+  <div
+    class="cube1"
+  />
+  <div
+    class="cube2"
+  />
+</div>
+`;

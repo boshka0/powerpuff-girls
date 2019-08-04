@@ -1,7 +1,6 @@
 import React,{ useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import find from 'lodash/find';
 import get from 'lodash/get';
 
@@ -15,7 +14,7 @@ import {
 import { defaultImg } from '../../utils/defaultValues';
 
 import Loader from '../loader';
-import Error from '../error';
+import ErrorComponent from '../error';
 
 import './episode-page.scss';
 import BackLink from '../back-home-link';
@@ -40,23 +39,32 @@ const EpisodePage = ({
   const info = find(episodes, { id: +params.id }) || episode || {};
   const imageSrc = get(info, 'image.medium', defaultImg);
 
-  return isEpisodeLoading && !episodes.length ? <Loader /> : (
+  return isEpisodeLoading && !episodes.length ? (
+    <Loader />
+  ) : (
     <div className={blockName}>
       <BackLink />
-      {episodeError ? <Error block="episode description" /> : (<div className={cardName}>
-        <p>Season {info.season}. Episode {info.number}</p>
-        <h1 className={`${cardName}-heading`}>{info.name}</h1>
-        <div className={`${cardName}-container`}>
-          <img
-            className={`${cardName}-image`}
-            alt={info.name}
-            src={imageSrc}
-          />
-          <div dangerouslySetInnerHTML={{
-            __html: info.summary
-          }}/>
+      {episodeError ? (
+        <ErrorComponent block="episode description" />
+      ) : (
+        <div className={cardName}>
+          <p>
+            Season {info.season}. Episode {info.number}
+          </p>
+          <h1 className={`${cardName}-heading`}>{info.name}</h1>
+          <div className={`${cardName}-container`}>
+            <img
+              className={`${cardName}-image`}
+              alt={info.name}
+              src={imageSrc}
+            />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: info.summary
+              }}
+            />
+          </div>
         </div>
-      </div>
       )}
     </div>
   );
@@ -78,7 +86,7 @@ EpisodePage.propTypes = {
   episodeError: PropTypes.string
 };
 
-export default connect(
+const ConnectedEpisodePage = connect(
   state => ({
     episode: episodeSelector(state),
     episodes: episodesSelector(state),
@@ -89,3 +97,5 @@ export default connect(
     loadEpisode: () => dispatch(loadEpisode(ownProps.match.params.id))
   })
 )(EpisodePage);
+
+export default ConnectedEpisodePage;

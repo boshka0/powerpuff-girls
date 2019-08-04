@@ -4,7 +4,7 @@ import { setShow, setShowError } from '../actions/show';
 import { SHOW } from '../constants';
 import { fetchShow } from '../api';
 
-function* handleShowLoad() {
+export function* handleShowLoad() {
   try {
     const show = yield call(fetchShow);
     yield put(setShow(show));
