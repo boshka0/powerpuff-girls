@@ -5,60 +5,64 @@
   display: none;
 }
 
-.show {
+.about {
   padding: 20px;
 
-  &-title {
-    @include rainbow-text();
+  &-show {
+    margin-bottom: 30px;
 
-    text-transform: uppercase;
-    font-size: 60px;
-    line-height: 60px;
-    text-align: center;
-    word-break: break-word;
-  }
-
-  &-info {
-    display: flex;
-    max-width: 700px;
-    margin: 0 auto;
-    margin-top: 30px;
-    align-items: center;
-    text-align: center;
-
-    @include respond(mobile) {
-      flex-direction: column;
-    }
-  }
-
-  &-image {
-    margin-right: 20px;
-  }
-
-  &-description {
-    font-size: 16px;
-    padding: 20px 20px 20px 0;
-
-    b {
+    &-title {
       @include rainbow-text();
 
-      font-size: 18px;
+      text-transform: uppercase;
+      font-size: 60px;
+      line-height: 60px;
+      text-align: center;
+      word-break: break-word;
+    }
+
+    &-info {
+      display: flex;
+      max-width: 700px;
+      margin: 0 auto;
+      margin-top: 30px;
+      align-items: center;
+      text-align: center;
+
+      @include respond(mobile) {
+        flex-direction: column;
+      }
+    }
+
+    &-image {
+      margin-right: 20px;
+    }
+
+    &-description {
+      font-size: 16px;
+      padding: 20px 20px 20px 0;
+
+      b {
+        @include rainbow-text();
+
+        font-size: 18px;
+      }
     }
   }
 
   &-episodes {
     margin-top: 30px;
     text-align: center;
-  }
 
-  &-episodes-title {
-    color: $main-color;
-    text-transform: uppercase;
-  }
+    &-title {
+      color: $main-color;
+      text-transform: uppercase;
+    }
 
-  &-episodes-container {
-    display: flex;
-    margin-top: 30px;
-    overflow-x: scroll;
+    &-container {
+      display: flex;
+      margin-top: 30px;
+      overflow-x: scroll;
+    }
   }
 }

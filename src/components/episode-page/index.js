@@ -9,11 +9,13 @@ import { loadEpisode } from '../../actions/episode';
 import {
   episodesSelector,
   episodeSelector,
-  episodeLoadingSelector
+  episodeLoadingSelector,
+  episodeErrorSelector
 } from '../../selectors';
 import { defaultImg } from '../../utils/defaultValues';
 
 import Loader from '../loader';
+import Error from '../error';
 
 import './episode-page.scss';
 
@@ -27,7 +29,8 @@ const EpisodePage = ({
       params
     },
     loadEpisode,
-    isEpisodeLoading = true
+    isEpisodeLoading,
+    episodeError
 }) => {
   useEffect(() => {
     if (!episodes.length) loadEpisode();
@@ -44,7 +47,7 @@ const EpisodePage = ({
       >
         BACK
       </Link>
-      <div className={cardName}>
+      {episodeError ? <Error block="episode description" /> : (<div className={cardName}>
         <p>Season {info.season}. Episode {info.number}</p>
         <h1 className={`${cardName}-heading`}>{info.name}</h1>
         <div className={`${cardName}-container`}>
@@ -58,6 +61,7 @@ const EpisodePage = ({
           }}/>
         </div>
       </div>
+      )}
     </div>
   );
 };
@@ -75,13 +79,15 @@ EpisodePage.propTypes = {
   }),
   isEpisodeLoading: PropTypes.bool,
   loadEpisode: PropTypes.func,
+  episodeError: PropTypes.string
 };
 
 export default connect(
   state => ({
     episode: episodeSelector(state),
     episodes: episodesSelector(state),
-    isEpisodeLoading: episodeLoadingSelector(state)
+    isEpisodeLoading: episodeLoadingSelector(state),
+    episodeError: episodeErrorSelector(state)
   }),
   (dispatch, ownProps) => ({
     loadEpisode: () => dispatch(loadEpisode(ownProps.match.params.id))

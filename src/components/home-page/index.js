@@ -8,23 +8,30 @@ import {
   episodesSelector,
   showSelector,
   episodesLoadingSelector,
-  showLoadingSelector
+  showLoadingSelector,
+  episodesErrorSelector,
+  showErrorSelector
 } from '../../selectors';
 import { loadEpisodes } from '../../actions/episodes';
 import { loadShow } from '../../actions/show';
 import EpisodePreview from './episode-preview';
 import Loader from '../loader';
+import Error from '../error';
 import './home-page.scss';
 
-const blockName = 'show';
+const blockName = 'about';
+const showBlockName = `${blockName}-show`;
+const episodesBlockName = `${blockName}-episodes`;
 
 const HomePage = ({
   episodes,
   show,
   loadEpisodes,
   loadShow,
-  isLoadingEpisodes = true,
-  isLoadingShow = true
+  isLoadingEpisodes,
+  isLoadingShow,
+  episodesError,
+  showError,
 }) => {
   useEffect(() => {
     loadEpisodes();
@@ -36,36 +43,42 @@ const HomePage = ({
 
   return isLoading ? <Loader /> : (
     <div className={blockName}>
-      <h1 className={`${blockName}-title`}>{show.name}</h1>
-      <div className={`${blockName}-info`}>
-        <img
-          alt={show.name}
-          src={showImageSrc}
-          className={`${blockName}-image`}
-        />
-        <div
-          className={`${blockName}-description`}
-          dangerouslySetInnerHTML={{
-          __html: show.summary,
-          }}
-        />
-      </div>
-      <div className={`${blockName}-episodes`}>
-        <h2 className={`${blockName}-episodes-title`}>Episode list:</h2>
-        <div className={`${blockName}-episodes-container`}>
-          { episodes.map((episode, index) => (
-            <Link
-              key={index}
-              to={`/episodes/${episode.id}`}
-            >
-              <EpisodePreview
-                episodeInfo={episode}
-              />
-            </Link>
-            ))
-          }
+      {showError ? <Error block="show info" /> : (
+        <div className={`${blockName}-show`}>
+          <h1 className={`${showBlockName}-title`}>{show.name}</h1>
+          <div className={`${showBlockName}-info`}>
+            <img
+              alt={show.name}
+              src={showImageSrc}
+              className={`${showBlockName}-image`}
+            />
+            <div
+              className={`${showBlockName}-description`}
+              dangerouslySetInnerHTML={{
+              __html: show.summary,
+              }}
+            />
+          </div>
         </div>
-      </div>
+      )}
+      {episodesError ? <Error block="episodes list" /> : (
+        <div className={`${blockName}-episodes`}>
+          <h2 className={`${episodesBlockName}-title`}>Episode list:</h2>
+          <div className={`${episodesBlockName}-container`}>
+            { episodes.map((episode, index) => (
+              <Link
+                key={index}
+                to={`/episodes/${episode.id}`}
+              >
+                <EpisodePreview
+                  episodeInfo={episode}
+                />
+              </Link>
+              ))
+            }
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -77,6 +90,8 @@ HomePage.propTypes = {
   loadShow: PropTypes.func,
   episodes: PropTypes.arrayOf(PropTypes.object),
   show: PropTypes.object,
+  episodesError: PropTypes.string,
+  showError: PropTypes.string
 };
 
 export default connect(
@@ -84,7 +99,9 @@ export default connect(
     episodes: episodesSelector(state),
     show: showSelector(state),
     isLoadingEpisodes: episodesLoadingSelector(state),
-    isLoadingShow: showLoadingSelector(state)
+    isLoadingShow: showLoadingSelector(state),
+    episodesError: episodesErrorSelector(state),
+    showError: showErrorSelector(state)
   }),
   dispatch => ({
     loadEpisodes: () => dispatch(loadEpisodes()),
