@@ -1,0 +1,13 @@
+.not-found {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  &-message {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+  }
+}

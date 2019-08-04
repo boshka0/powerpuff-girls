@@ -18,6 +18,7 @@ import Loader from '../loader';
 import Error from '../error';
 
 import './episode-page.scss';
+import BackLink from '../back-home-link';
 
 const blockName = 'episode';
 const cardName = `${blockName}-card`;
@@ -41,12 +42,7 @@ const EpisodePage = ({
 
   return isEpisodeLoading && !episodes.length ? <Loader /> : (
     <div className={blockName}>
-      <Link
-        className={`${blockName}-back-link`}
-        to='/'
-      >
-        BACK
-      </Link>
+      <BackLink />
       {episodeError ? <Error block="episode description" /> : (<div className={cardName}>
         <p>Season {info.season}. Episode {info.number}</p>
         <h1 className={`${cardName}-heading`}>{info.name}</h1>
