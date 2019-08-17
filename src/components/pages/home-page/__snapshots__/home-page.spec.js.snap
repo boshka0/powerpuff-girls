@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`episode-page should render correctly home-page if episodes and show info are available 1`] = `
+<div
+  class="about"
+>
+  <div
+    class="about-show"
+  >
+    <h1
+      class="about-show__title"
+    >
+      Princess Buttercup
+    </h1>
+    <div
+      class="about-show__info"
+    >
+      <img
+        alt="Princess Buttercup"
+        class="about-show__image"
+        src="http://static.tvmaze.com/uploads/images/medium_landscape/53/132618.jpg"
+      />
+      <div
+        class="about-show__description"
+      >
+        <p>
+          Buttercup becomes enamored with a team of roller derby girls called the Derbytantes. When she starts spending all of her time with them, Princess Morbucks seeks to be her replacement in the Powerpuff Girls.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="about-episodes"
+  >
+    <h2
+      class="about-episodes__title"
+    >
+      Episode list:
+    </h2>
+    <div
+      class="about-episodes__container"
+    >
+      <a
+        class="about-episodes__link"
+        href="#/episodes/657308"
+      >
+        <div
+          class="episode-preview"
+        >
+          <img
+            alt="Escape from Monster Island"
+            class="episode-preview__image"
+            src="http://static.tvmaze.com/uploads/images/medium_landscape/53/132617.jpg"
+          />
+          <div
+            class="episode-preview__title"
+          >
+            <p
+              class="episode-preview__title-count"
+            >
+              Season 1. Episode 1
+            </p>
+            <p>
+              Escape from Monster Island
+            </p>
+          </div>
+        </div>
+      </a>
+      <a
+        class="about-episodes__link"
+        href="#/episodes/657309"
+      >
+        <div
+          class="episode-preview"
+        >
+          <img
+            alt="Princess Buttercup"
+            class="episode-preview__image"
+            src="http://static.tvmaze.com/uploads/images/medium_landscape/53/132618.jpg"
+          />
+          <div
+            class="episode-preview__title"
+          >
+            <p
+              class="episode-preview__title-count"
+            >
+              Season 1. Episode 2
+            </p>
+            <p>
+              Princess Buttercup
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`episode-page should render errors if there was an error while fetching data 1`] = `
+<div
+  class="about"
+>
+  <div
+    class="error"
+  >
+    Sorry, some error occurred while preparing the response for show info
+  </div>
+  <div
+    class="error"
+  >
+    Sorry, some error occurred while preparing the response for episodes list
+  </div>
+</div>
+`;

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import HomePage from './components/home-page';
-import EpisodePage from './components/episode-page';
-import NotFoundPage from './components/not-found-page';
+import HomePage from './components/pages/home-page';
+import EpisodePage from './components/pages/episode-page';
+import NotFoundPage from './components/pages/not-found-page';
 
 import './main.scss';
 

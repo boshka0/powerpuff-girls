@@ -5,8 +5,8 @@ import configureStore from 'redux-mock-store';
 import { mount } from 'enzyme';
 
 import App from './App';
-import HomePage from './components/home-page';
-import NotFoundPage from './components/not-found-page';
+import HomePage from './components/pages/home-page';
+import NotFoundPage from './components/pages/not-found-page';
 
 const mockStore = configureStore([]);
 const initialState = {};
